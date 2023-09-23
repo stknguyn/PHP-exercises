@@ -52,4 +52,3 @@ if ($action == 'list_products') {
         include('product_view.php');
     }
 }
-?>
