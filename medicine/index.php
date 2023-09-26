@@ -59,8 +59,11 @@ $statementsType->closeCursor();
   </table>
   <form class="row g-3" action="add_medicine.php" method="post">
     <div class="col-auto form-floating">
-      <input class="form-control" id="medicineTypeID" name="medicineTypeID" placeholder="">
-      <label for="medicineTypeID">Medicine Type ID</label>
+      <select class="form-select" name="medicineTypeID">
+        <?php foreach ($medicineTypes as $medicineType) : ?>
+          <option value="<?php echo $medicineType['medicineTypeID'] ?>"><?php echo $medicineType['medicineTypeName'] ?></option>
+        <?php endforeach; ?>
+      </select>
     </div>
     <div class="col-auto form-floating">
       <input class="form-control" id="quantity" name="quantity" placeholder="Quantity">
