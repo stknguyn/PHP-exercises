@@ -1,5 +1,5 @@
 <?php
-
+require_once('database.php');
 
 ?>
 <!DOCTYPE html>
@@ -13,23 +13,11 @@
 </head>
 
 <body>
-  <div class="container">
-    <h3>Login</h3>
-    <form action="login.php" method="post">
-      <div class="col-auto form-floating row">
-        <input type="text" class="form-control" id="username" name="username" placeholder="">
-        <label for="username">Username</label>
-      </div>
-      <div class="col-auto form-floating row">
-      <input type="password" class="form-control" id="password" name="password" placeholder="">
-      <label for="password">Password</label>
-    </div>
-      <div class="col-auto form-floating row">
-      <input type="submit" class="btn btn-primary" value="Sign-in">
-    </div>
+  <ul class="list-group">
+    <a href="login.php" class="list-group-item">Login</a>
+    <a href="register.php" class="list-group-item">Register</a>
+  </ul>
 
-    </form>
-  </div>
 </body>
 
 </html>

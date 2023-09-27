@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +8,16 @@
 </head>
 <body>
   <div class="container container-sm">
-    <form action="check_user.php" method="post">
+    <form action="add_user.php" method="post">
       <span class="input-group-text">Username:</span>
       <input type="text" class="form-control" name="username">
 
       <span class="input-group-text">Password:</span>
       <input type="password" class="form-control" name="password">
+
+      <span class="input-group-text">Fullname:</span>
+      <input type="fullname" class="form-control" name="fullname">
+
       <input type="submit" class="btn btn-primary text-center">
     </form>
   </div>
