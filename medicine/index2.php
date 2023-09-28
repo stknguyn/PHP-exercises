@@ -1,6 +1,6 @@
 <?php
-require_once('database.php');
-
+require('./model/login_db.php');
+require('./model/database.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,8 +14,8 @@ require_once('database.php');
 
 <body>
   <ul class="list-group">
-    <a href="login.php" class="list-group-item">Login</a>
-    <a href="register.php" class="list-group-item">Register</a>
+    <a href="login" class="list-group-item">Login</a>
+    <a href="register" class="list-group-item">Register</a>
   </ul>
 
 </body>
