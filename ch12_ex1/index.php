@@ -53,4 +53,3 @@ switch($action) {
         include('cart_view.php');
         break;
 }
-?>
