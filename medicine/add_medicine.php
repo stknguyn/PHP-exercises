@@ -8,7 +8,7 @@ if($medicineTypeID == null || $quantity == null) {
   include('database_error.php');
 }
 else {
-  require_once('database.php');
+  require_once('../model/database.php');
   $query = 'INSERT INTO medicine (medicineID, medicineTypeID, quantity, decription) VALUES
             (NULL, :medicineTypeID, :quantity, :decription)';
   $statement = $db -> prepare($query);

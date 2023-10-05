@@ -6,7 +6,7 @@ if($medicineTypeName == null) {
   include('database_error.php');
 }
 else {
-  require_once('database.php');
+  require_once('../model/database.php');
   $query = 'INSERT INTO medicinetype (medicineTypeID, medicineTypeName) VALUES
             (NULL, :medicineTypeName)';
   $statement = $db -> prepare($query);

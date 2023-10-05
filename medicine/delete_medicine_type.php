@@ -5,7 +5,7 @@ if ($medicineTypeID == null) {
   include('database_error.php');
 }
 else {
-  require_once('database.php');
+  require_once('../model/database.php');
   $query = 'DELETE FROM medicinetype WHERE medicinetype.medicineTypeID = :medicineTypeID';
   $statementType = $db -> prepare($query);
   $statementType ->bindValue(':medicineTypeID', $medicineTypeID);
