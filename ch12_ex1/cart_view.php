@@ -60,7 +60,8 @@
         <?php endif; ?>
         <p><a href=".?action=show_add_item">Add Item</a></p>
         <p><a href=".?action=empty_cart">Empty Cart</a></p>
-
+        <p><a href=".?action=end_session">End Session and Delete Cookie</a></p>
+        <p> <b>Session ID: </b> <?php echo session_id(); ?></p>
       </main>
     </body>
 
