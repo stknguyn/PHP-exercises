@@ -1,4 +1,4 @@
-[![](https://skillicons.dev/icons?i=php)](https://skillicons.dev)
+[![](https://skillicons.dev/icons?i=php,vim,vscode)](https://skillicons.dev)
 ## Giới thiệu
 Đây là repo chứa các bài tập môn Công nghệ và lập trình Web.
 ## Tổng quan
