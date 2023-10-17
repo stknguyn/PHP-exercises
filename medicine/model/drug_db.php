@@ -68,4 +68,10 @@ class DrugDB
     }
     return $drugs;
   }
+  public function editDrug($id,$name,$description,$category_id,$price,$stock_quantity) {
+    $db = Database::getDB();
+    $query = "UPDATE drug SET Name = '$name',Description ='$description',CategoryID = '$category_id',Price = '$price',StockQuantity = '$stock_quantity' WHERE DrugID = $id";
+    $result = $db ->exec($query);
+    return $result;
+  }
 }

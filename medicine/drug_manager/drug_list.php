@@ -1,5 +1,6 @@
 <?php include('../view/header.php') ?>
 <main>
+  <h1 class="text-warning text-center">MANAGER PAGE</h1>
   <div class="container row">
     <aside class="col-lg-2">
       <h3 class="text-primary">Categories</h3>
@@ -14,23 +15,23 @@
       </nav>
     </aside>
     <section class="col-lg-10">
-      <h3 class="text-primary align-baseline"><?php echo $current_category->getName(); ?></h3>
+      <h4 class="text-success align-baseline"><?php echo $current_category->getName(); ?></h4>
       <table class="table table-light table-borderless table-hover">
         <thead>
           <tr>
             <th scope="col" class="align-middle text-center">ID</th>
             <th scope="col" class="align-middle text-center">Name</th>
             <th scope="col" class="align-middle text-center">Decription</th>
-            <th scope="col" class="align-middle text-center">CategoryID</th>
+            <th scope="col" class="align-middle text-center">Category ID</th>
             <th scope="col" class="align-middle text-center">Price</th>
             <th scope="col" class="align-middle text-center">Stock Quantity</th>
-            <th scope="col" class="align-middle text-center">&nbsp;</th>
+            <th scope="col" colspan="3" class="align-middle text-center">&nbsp;</th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($current_drugs as $drug) : ?>
             <tr>
-              <td class="align-middle text-center"><?php echo $drug->getID() ?></td>
+              <th class="align-middle text-center"><?php echo $drug->getID() ?></th>
               <td class="align-middle text-center"><?php echo $drug->getName() ?></td>
               <td class="align-middle text-center"><?php echo $drug->getDescription() ?></td>
               <td class="align-middle text-center"><?php echo $drug->getCategoryID() ?></td>
@@ -42,6 +43,24 @@
                   <input type="hidden" name="action" value="drug_view">
                   <button class="btn btn-primary" type="submit">
                     View
+                  </button>
+                </form>
+              </td>
+              <td>
+                <form action="index.php" method="post">
+                  <input type="hidden" name="drug_id" value="<?php echo $drug->getID(); ?>">
+                  <input type="hidden" name="action" value="drug_edit">
+                  <button class="btn btn-warning" type="submit">
+                    Edit
+                  </button>
+                </form>
+              </td>
+              <td>
+                <form action="index.php" method="post">
+                  <input type="hidden" name="drug_id" value="<?php echo $drug->getID(); ?>">
+                  <input type="hidden" name="action" value="drug_add">
+                  <button class="btn btn-success" type="submit">
+                    Add
                   </button>
                 </form>
               </td>
