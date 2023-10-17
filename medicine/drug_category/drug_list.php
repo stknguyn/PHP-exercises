@@ -21,7 +21,6 @@
             <th scope="col" class="align-middle text-center">ID</th>
             <th scope="col" class="align-middle text-center">Name</th>
             <th scope="col" class="align-middle text-center">Decription</th>
-            <th scope="col" class="align-middle text-center">CategoryID</th>
             <th scope="col" class="align-middle text-center">Price</th>
             <th scope="col" class="align-middle text-center">Stock Quantity</th>
             <th scope="col" class="align-middle text-center">&nbsp;</th>
@@ -33,7 +32,6 @@
               <td class="align-middle text-center"><?php echo $drug->getID() ?></td>
               <td class="align-middle text-center"><?php echo $drug->getName() ?></td>
               <td class="align-middle text-center"><?php echo $drug->getDescription() ?></td>
-              <td class="align-middle text-center"><?php echo $drug->getCategoryID() ?></td>
               <td class="align-middle text-center"><?php echo $drug->getPrice() ?></td>
               <td class="align-middle text-center"><?php echo $drug->getStockQuantity() ?></td>
               <td>

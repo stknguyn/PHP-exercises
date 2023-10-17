@@ -42,7 +42,7 @@
     case 'drug_view':
       $drug_id = filter_input(INPUT_POST, 'drug_id', FILTER_VALIDATE_INT);
       $drug = $drugDB->getDrug($drug_id);
-      include('drug_view.php');
+      include('../view/drug_view.php');
       break;
   }
   ?>

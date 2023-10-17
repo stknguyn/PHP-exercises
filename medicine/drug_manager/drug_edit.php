@@ -4,7 +4,7 @@ $drug = new Drug();
 $current_drug = $drugDB->getDrug($drug_id);
 ?>
 <main>
-  <div class="container-sm">
+  <div class="container">
     <form action="index.php" method="post">
       <div class="mb-2">
         <label for="formID" class="form-label">Drug ID:</label>
@@ -32,7 +32,7 @@ $current_drug = $drugDB->getDrug($drug_id);
       </div>
       <div class="mb-2">
         <input type="hidden" name="action" value="edit_drug">
-        <input type="submit" class="form-control btn btn-primary" placeholder="Submit">
+        <input type="submit" class="form-control btn btn-primary">
       </div>
     </form>
   </div>

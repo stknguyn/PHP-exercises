@@ -22,7 +22,6 @@
             <th scope="col" class="align-middle text-center">ID</th>
             <th scope="col" class="align-middle text-center">Name</th>
             <th scope="col" class="align-middle text-center">Decription</th>
-            <th scope="col" class="align-middle text-center">Category ID</th>
             <th scope="col" class="align-middle text-center">Price</th>
             <th scope="col" class="align-middle text-center">Stock Quantity</th>
             <th scope="col" colspan="3" class="align-middle text-center">&nbsp;</th>
@@ -34,14 +33,13 @@
               <th class="align-middle text-center"><?php echo $drug->getID() ?></th>
               <td class="align-middle text-center"><?php echo $drug->getName() ?></td>
               <td class="align-middle text-center"><?php echo $drug->getDescription() ?></td>
-              <td class="align-middle text-center"><?php echo $drug->getCategoryID() ?></td>
               <td class="align-middle text-center"><?php echo $drug->getPrice() ?></td>
               <td class="align-middle text-center"><?php echo $drug->getStockQuantity() ?></td>
               <td>
                 <form action="index.php" method="post">
                   <input type="hidden" name="drug_id" value="<?php echo $drug->getID(); ?>">
                   <input type="hidden" name="action" value="drug_view">
-                  <button class="btn btn-primary" type="submit">
+                  <button class="btn btn-info" type="submit">
                     View
                   </button>
                 </form>
@@ -58,9 +56,9 @@
               <td>
                 <form action="index.php" method="post">
                   <input type="hidden" name="drug_id" value="<?php echo $drug->getID(); ?>">
-                  <input type="hidden" name="action" value="drug_add">
-                  <button class="btn btn-success" type="submit">
-                    Add
+                  <input type="hidden" name="action" value="drug_delete">
+                  <button class="btn btn-danger" type="submit">
+                    Delete
                   </button>
                 </form>
               </td>
@@ -68,6 +66,10 @@
           <?php endforeach; ?>
         </tbody>
       </table>
+      <form action="index.php">
+        <input type="hidden" name="action" value="drug_add">
+        <button type="submit" class="btn btn-success">Add drug</button>
+      </form>
     </section>
   </div>
   <div class="row">

@@ -23,7 +23,8 @@ class DrugDB
   {
     $db = Database::getDB();
     $query = "DELETE FROM drug WHERE DrugID ='$drug_id'";
-    $db->exec($query);
+    $result = $db->exec($query);
+    return $result;
   }
   public function addDrug($drug)
   {
@@ -35,7 +36,8 @@ class DrugDB
     $stock_quantity = $drug->getStockQuantity();
     $query = "INSERT INTO drug (Name, Description, CategoryID, Price, StockQuantity)
             VALUES ('$name','$description','$category_id','$price','$stock_quantity')";
-    $db -> exec($query);
+    $result = $db -> exec($query);
+    return $result;
   }
   public function getDrug($drug_id) {
     $db = Database::getDB();
