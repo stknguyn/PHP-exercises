@@ -1,7 +1,7 @@
 <?php include('../view/header.php') ?>
 <h2 class="text-center text-success">ADD DRUG</h2>
 <div class="container">
-  <form action="index.php" method="post">
+  <form action="index.php" method="post" enctype="multipart/form-data">
     <div class="mb-2">
       <label for="SelectCat" class="form-label">Category ID:</label>
       <select name="category_id" id="SelectCat" class="form-select">
@@ -27,6 +27,10 @@
     <div class="mb-2">
       <label for="formStockQuan" class="form-label">Stock Quantity:</label>
       <input name="stock_quantity" type="text" class="form-control" id="formStockQuan">
+    </div>
+    <div class="mb-2">
+      <label for="formDrugImg" class="form-label">Drug Image:</label>
+      <input name="drug_image" type="file" class="form-control" id="formDrugImg">
     </div>
     <div class="mb-2">
       <input type="hidden" name="action" value="add_drug">

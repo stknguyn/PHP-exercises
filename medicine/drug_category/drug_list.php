@@ -14,7 +14,7 @@
       </nav>
     </aside>
     <section class="col-lg-10">
-      <h3 class="text-primary align-baseline"><?php echo $current_category->getName(); ?></h3>
+      <h4 class="text-success align-baseline"><?php echo $current_category->getName(); ?></h4>
       <table class="table table-light table-borderless table-hover">
         <thead>
           <tr>
@@ -38,7 +38,7 @@
                 <form action="index.php" method="post">
                   <input type="hidden" name="drug_id" value="<?php echo $drug->getID(); ?>">
                   <input type="hidden" name="action" value="drug_view">
-                  <button class="btn btn-primary" type="submit">
+                  <button class="btn btn-info" type="submit">
                     View
                   </button>
                 </form>

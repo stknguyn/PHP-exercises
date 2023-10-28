@@ -70,6 +70,10 @@
         <input type="hidden" name="action" value="drug_add">
         <button type="submit" class="btn btn-success">Add drug</button>
       </form>
+      <form action="index.php">
+        <input type="hidden" name="action" value="drug_upload">
+        <button type="submit" class="btn btn-secondary">Upload Image</button>
+      </form>
     </section>
   </div>
   <div class="row">

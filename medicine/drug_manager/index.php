@@ -58,26 +58,54 @@
       $description = filter_input(INPUT_POST, 'description');
       $price = filter_input(INPUT_POST, 'price');
       $stock_quantity = filter_input(INPUT_POST, 'stock_quantity');
+
       if ($category_id == null || $name == null || $price == null || $stock_quantity == null) {
         $error = 'Some information is missing or wrong';
         include('../error/error.php');
       } else {
-        $drug = new Drug();
-        $drug->setCategoryID($category_id);
-        $drug->setName($name);
-        $drug->setDescription($description);
-        $drug->setPrice($price);
-        $drug->setStockQuantity($stock_quantity);
-        $result = $drugDB->addDrug($drug);
-        if ($result == 0) {
-          $error_message = 'Cannot add the drug to database';
-          include('../error/database_error.php');
+        // Check if a file was uploaded
+        if (isset($_FILES['drug_image']) && $_FILES['drug_image']['error'] === UPLOAD_ERR_OK) {
+          // Get the file name and path
+          $image_path = basename($_FILES['drug_image']['name']);
+          $target_dir = 'medicine/uploads/';
+          $target_file = $target_dir . $image_path;
+
+          // Validate file type if necessary (e.g., check if it's an image)
+          $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+          if ($imageFileType !== 'jpg' || $imageFileType !== 'jpeg' ||  $imageFileType !== 'png') {
+            $error = 'Only JPG, JPEG, and PNG files are allowed.';
+            include('../error/error.php');
+          } else {
+            // Move the uploaded file to the target directory
+            if (move_uploaded_file($_FILES['drug_image']['name'], $target_file)) {
+              $drug = new Drug();
+              $drug->setCategoryID($category_id);
+              $drug->setName($name);
+              $drug->setDescription($description);
+              $drug->setPrice($price);
+              $drug->setStockQuantity($stock_quantity);
+              $drug->setImageName($image_path);
+
+              $result = $drugDB->addDrug($drug);
+              if ($result) {
+                $error = "Adding drug successfully";
+                include('../error/error.php');
+              } else {
+                $error_message = 'Cannot add the drug to the database';
+                include('../error/database_error.php');
+              }
+            } else {
+              $error = 'Error uploading the file.';
+              include('../error/error.php');
+            }
+          }
         } else {
-          $error = "Adding drug successfully";
+          $error = 'File upload failed.';
           include('../error/error.php');
         }
       }
       break;
+
     case 'drug_view':
       $drug_id = filter_input(INPUT_POST, 'drug_id', FILTER_VALIDATE_INT);
       $drug = $drugDB->getDrug($drug_id);
@@ -93,26 +121,45 @@
       $current_drugs = $drugDB->getDrugsByCategory($current_category->getID());
       include('drug_list.php');
       break;
-    case 'edit_drug':
-      $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
-      $name = filter_input(INPUT_POST, 'name');
-      $description = filter_input(INPUT_POST, 'description');
-      $category_id = filter_input(INPUT_POST, 'category_id');
-      $price = filter_input(INPUT_POST, 'price');
-      $stock_quantity = filter_input(INPUT_POST, 'stock_quantity');
-      if ($id == null || $name == null || $description == null || $category_id == null || $category_id == null || $price == null || $stock_quantity == null) {
-        $error = 'Missing information to change, please check and try again';
-        include('../error/error.php');
-      } else {
-        $result = $drugDB->editDrug($id, $name, $description, $category_id, $price, $stock_quantity);
-        if ($result > 0) {
-          $error_message = 'success';
-          include('../error/database_error.php');
+      // case 'edit_drug':
+      //   $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+      //   $name = filter_input(INPUT_POST, 'name');
+      //   $description = filter_input(INPUT_POST, 'description');
+      //   $category_id = filter_input(INPUT_POST, 'category_id');
+      //   $price = filter_input(INPUT_POST, 'price');
+      //   $stock_quantity = filter_input(INPUT_POST, 'stock_quantity');
+      //   if ($id == null || $name == null || $description == null || $category_id == null || $category_id == null || $price == null || $stock_quantity == null) {
+      //     $error = 'Missing information to change, please check and try again';
+      //     include('../error/error.php');
+      //   } else {
+      //     $result = $drugDB->editDrug($id, $name, $description, $category_id, $price, $stock_quantity,$image_name);
+      //     if ($result > 0) {
+      //       $error_message = 'success';
+      //       include('../error/database_error.php');
+      //     } else {
+      //       $error_message = 'Cannot update to database!';
+      //       include('../error/database_error.php');
+      //     }
+      //   }
+      //   break;
+    case 'drug_upload':
+      include('drug_upload.php');
+      break;
+    case 'upload_drug':
+      if (isset($_FILES['drug_image']) && $_FILES['drug_image']['error'] === UPLOAD_ERR_OK) {
+        // Get the file name and path
+        $image_path = basename($_FILES['drug_image']['name']);
+        $target_dir = 'uploads/'; // Remove the leading slash from the target directory
+        $target_file = $target_dir . $image_path;
+
+        // Use move_uploaded_file correctly (source file and target file)
+        if (move_uploaded_file($_FILES['drug_image']['tmp_name'], $target_file)) {
+          echo "The file " . htmlspecialchars(basename($_FILES["drug_image"]["name"])) . " has been uploaded.";
         } else {
-          $error_message = 'Cannot update to database!';
-          include('../error/database_error.php');
+          echo 'Sorry, there was an error uploading your file.';
         }
       }
+
       break;
   }
   ?>

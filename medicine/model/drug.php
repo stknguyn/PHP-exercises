@@ -1,7 +1,7 @@
 <?php
 class Drug
 {
-  private $id, $name, $decription, $category_id, $price, $stock_quantity;
+  private $id, $name, $decription, $category_id, $price, $stock_quantity, $imageName;
   public function __construct()
   {
     $this->id = 0;
@@ -10,6 +10,7 @@ class Drug
     $this->category_id = 0;
     $this->price = 0;
     $this->stock_quantity = 0;
+    $this ->imageName = '';
   }
   public function getID()
   {
@@ -58,5 +59,11 @@ class Drug
   public function setStockQuantity($value)
   {
     $this->stock_quantity = $value;
+  }
+  public function setImageName($value) {
+    $this -> imageName = $value;
+  }
+  public function getImageName() {
+    return $this->imageName;
   }
 }

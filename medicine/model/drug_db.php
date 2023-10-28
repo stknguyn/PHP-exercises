@@ -15,6 +15,7 @@ class DrugDB
       $drug->setCategoryID($row['CategoryID']);
       $drug->setPrice($row['Price']);
       $drug->setStockQuantity($row['StockQuantity']);
+      $drug->setImageName($row['ImageName']);
       $drugs[] = $drug;
     }
     return $drugs;
@@ -34,8 +35,9 @@ class DrugDB
     $category_id = $drug->getCategoryID();
     $price = $drug->getPrice();
     $stock_quantity = $drug->getStockQuantity();
-    $query = "INSERT INTO drug (Name, Description, CategoryID, Price, StockQuantity)
-            VALUES ('$name','$description','$category_id','$price','$stock_quantity')";
+    $image_name = $drug -> getImageName();
+    $query = "INSERT INTO drug (Name, Description, CategoryID, Price, StockQuantity, ImageName)
+            VALUES ('$name','$description','$category_id','$price','$stock_quantity','$image_name)";
     $result = $db -> exec($query);
     return $result;
   }
@@ -51,6 +53,7 @@ class DrugDB
     $drug -> setPrice($result['Price']);
     $drug -> setCategoryID($result['CategoryID']);
     $drug -> setStockQuantity($result['StockQuantity']);
+    $drug -> setImageName($result['ImageName']);
     return $drug;
   }
   public function getDrugsByCategory($category_id) {
@@ -66,13 +69,14 @@ class DrugDB
       $drug ->setCategoryID($row['CategoryID']);
       $drug ->setPrice($row['Price']);
       $drug ->setStockQuantity($row['StockQuantity']);
+      $drug ->setImageName($row['ImageName']);
       $drugs[] =$drug;
     }
     return $drugs;
   }
-  public function editDrug($id,$name,$description,$category_id,$price,$stock_quantity) {
+  public function editDrug($id,$name,$description,$category_id,$price,$stock_quantity,$image_name) {
     $db = Database::getDB();
-    $query = "UPDATE drug SET Name = '$name',Description ='$description',CategoryID = '$category_id',Price = '$price',StockQuantity = '$stock_quantity' WHERE DrugID = $id";
+    $query = "UPDATE drug SET Name = '$name',Description ='$description',CategoryID = '$category_id',Price = '$price',StockQuantity = '$stock_quantity', ImageName = '$image_name' WHERE DrugID = $id";
     $result = $db ->exec($query);
     return $result;
   }
