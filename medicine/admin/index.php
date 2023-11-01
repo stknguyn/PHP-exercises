@@ -8,27 +8,12 @@ $view = filter_input(INPUT_POST, 'view');
 if ($view == null) {
   $view = filter_input(INPUT_GET, 'view');
   if ($view == null) {
-    $view = 'account';
+    $view = 'login';
   }
 }
 $action = filter_input(INPUT_POST, 'action');
 if ($action == null) {
   $action = filter_input(INPUT_GET, 'action');
-}
-switch ($view) {
-  case 'account':
-    header('Location: account.php');
-    break;
-  case 'register':
-    include('register.php');
-    break;
-  case 'login':
-    include('login.php');
-    break;
-    case 'logout':
-      session_destroy();
-      include('login.php');
-      break;
 }
 switch ($action) {
   case 'add_admin':
@@ -64,11 +49,10 @@ switch ($action) {
     if ($username !== null && $password !== null) {
       $check = $adminDB->checkAdmin($username, $password);
       if ($check == true) {
-        $id = $adminDB -> getAdminID($username,$password);
-        $_SESSION['user_name'] = $adminDB ->getAdminNameByID($id);
-        echo "<script>$('#successToast').toast('show');</script>";
-        header('Location: home.php');
-        exit();
+        $id = $adminDB->getAdminID($username, $password);
+        $_SESSION['user_name'] = $adminDB->getAdminNameByID($id);
+        $_SESSION['expire'] = time() + 60*60*2;
+        $view = 'login';
       } else {
         header('Location: login-fail.php');
         exit();
@@ -78,4 +62,48 @@ switch ($action) {
       exit();
     }
     break;
+  case 'edit_account':
+    $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+    $firstname = filter_input(INPUT_POST, 'firstname');
+    $lastname = filter_input(INPUT_POST, 'lastname');
+    $email = filter_input(INPUT_POST, 'email');
+    $username = filter_input(INPUT_POST, 'username');
+    $password = filter_input(INPUT_POST, 'password');
+    $adminDB->editAdmin($id, $firstname, $lastname, $email, $username, $password);
+    header('Location: account.php');
+    break;
+
+  case 'delete_account':
+    $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+    $adminDB->deleteAdmin($id);
+    header('Location: account.php');
+    break;
+}
+switch ($view) {
+  case 'account':
+    if (isset($_SESSION['expire'])) {
+      header('Location: account.php');
+    } else {
+      header('Location: login.php');
+    }
+    break;
+  case 'register':
+    include('register.php');
+    break;
+  case 'login':
+    if (isset($_SESSION['user_name']) && isset($_SESSION['expire'])) {
+      header('Location: account.php');
+    } else {
+      header('Location: login.php');
+    }
+    break;
+  case 'logout':
+    unset($_SESSION['user_name']);
+    session_destroy();
+    header('Location: login.php');
+    break;
+  case 'edit_form':
+    $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+    $admin = $adminDB->getAdmin($id);
+    include('./view/admin_edit.php');
 }

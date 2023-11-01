@@ -1,11 +1,27 @@
-<?php include('./includes/header.php');
+<?php
+session_start();
+include('./includes/header.php');
 include('./model/database.php');
 include('./model/admin.php');
 include('./model/admin_db.php');
 $adminDB = new AdminDB();
 $admins = $adminDB->getAdmins();
 ?>
+<?php
 
+$now = time();
+if ($_SESSION['expire'] < $now) {
+  session_destroy();
+}
+?>
+<?php if (!isset($_SESSION['expire'])) :?>
+<form name="myform" action="index.php" method="post">
+<input type="hidden" name="view" value="login">
+</form>
+<script>
+  document.myform.submit();
+</script>
+  <?php endif; ?>
 <body id="page-top">
   <!-- Page Wrapper -->
   <div id="wrapper">
@@ -172,26 +188,27 @@ $admins = $adminDB->getAdmins();
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['user_name'] ?></span>
                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  <i class="fas fa-user fa-sm fa-fw mr-2" style="color: #4e73df;"></i>
                   Profile
                 </a>
                 <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                  <i class="fa-solid fa-gears fa-xs"></i>
                   Settings
                 </a>
                 <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                  <i class="fas fa-list fa-sm fa-fw mr-2 text-info-400"></i>i
                   Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-danger-400"></i>
                   Logout
                 </a>
               </div>
@@ -371,20 +388,35 @@ $admins = $adminDB->getAdmins();
                         <td>
                           <form action="index.php" method="post">
                             <input type="hidden" name="id" value="<?php echo $admin->getID(); ?>">
-                            <input type="hidden" name="action" value="user_edit">
+                            <input type="hidden" name="view" value="edit_form">
                             <button class="btn btn-warning" type="submit">
-                              Edit
+                              <i class="fa-solid fa-pencil fa-sm"></i> Edit
                             </button>
                           </form>
                         </td>
                         <td>
-                          <form action="index.php" method="post">
-                            <input type="hidden" name="drug_id" value="<?php echo $admin->getID(); ?>">
-                            <input type="hidden" name="action" value="user_delete">
-                            <button class="btn btn-danger" type="submit">
-                              Delete
-                            </button>
-                          </form>
+                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash fa-sm"></i> Delete</button>
+                          <!-- Modal -->
+                          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-body">
+                                  Are you sure to delete this account?
+                                  <br>
+                                </div>
+                                <div class="modal-footer">
+                                  <form action="index.php" method="post">
+                                    <input type="hidden" name="action" value="delete_account">
+                                    <input type="hidden" name="id" value="<?php echo $admin->getID(); ?>">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-danger">
+                                      <i class="fa-solid fa-trash fa-sm"></i> Delete</button>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
                         </td>
 
                       </tr>
@@ -398,6 +430,14 @@ $admins = $adminDB->getAdmins();
         <!-- /.container-fluid -->
 
       </div>
+    </div>
+  </div>
+  <div class="position-fixed bottom-0 end-0 toast fade show bg-white border-left-success box-shadow" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex justify-content-end">
+      <div class="toast-body">
+        <b>Login Successfully!</b>
+      </div>
+      <button type="button" class="btn-close btn-close-gray me-0 ms-auto mt-auto mt-auto mb-auto" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
   </div>
   <!-- End of Main Content -->

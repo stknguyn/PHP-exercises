@@ -15,6 +15,7 @@
   <div class="container d-flex flex-column">
     <a href="drug_manager" class="btn btn-primary">Drug Manager</a>
     <a href="drug_category" class="btn btn-danger">Drug Category</a>
+    <a href="admin" class="btn btn-info">Admin Page</a>
   </div>
   <?php include('./view/footer.php') ?>
 </body>

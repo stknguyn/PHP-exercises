@@ -74,10 +74,26 @@ class AdminDB
     $result = $db->exec($query);
     return $result;
   }
-  public function editAdmin($id,$firstname,$lastname,$email,$username,$password) {
+  public function editAdmin($id, $firstname, $lastname, $email, $username, $password)
+  {
     $db = Database::getDB();
     $query = "UPDATE admins SET Firstname = '$firstname', Lastname ='$lastname', Email = '$email', Username = '$username', Password = '$password' WHERE ID = $id";
-    $result = $db ->exec($query);
+    $result = $db->exec($query);
     return $result;
+  }
+  public function getAdmin($id)
+  {
+    $db = Database::getDB();
+    $query = "SELECT * FROM admins WHERE ID = '$id'";
+    $stmt = $db->query($query);
+    $result = $stmt->fetch();
+    $admin = new Admin();
+    $admin->setID($result['ID']);
+    $admin->setFirstname($result['Firstname']);
+    $admin->setLastname($result['Lastname']);
+    $admin->setEmail($result['Email']);
+    $admin->setUsername($result['Username']);
+    $admin->setPassword($result['Password']);
+    return $admin;
   }
 }
