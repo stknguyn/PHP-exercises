@@ -83,24 +83,30 @@ switch ($view) {
   case 'account':
     if (isset($_SESSION['expire'])) {
       header('Location: account.php');
+      exit();
     } else {
       header('Location: login.php');
+      exit();
     }
     break;
   case 'register':
-    include('register.php');
+    header('register.php');
+    exit();
     break;
   case 'login':
     if (isset($_SESSION['user_name']) && isset($_SESSION['expire'])) {
       header('Location: account.php');
+      exit();
     } else {
       header('Location: login.php');
+      exit();
     }
     break;
   case 'logout':
     unset($_SESSION['user_name']);
     session_destroy();
     header('Location: login.php');
+    exit();
     break;
   case 'edit_form':
     $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);

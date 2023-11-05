@@ -432,17 +432,11 @@ if ($_SESSION['expire'] < $now) {
       </div>
     </div>
   </div>
-  <div class="position-fixed bottom-0 end-0 toast fade show bg-white border-left-success box-shadow" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="d-flex justify-content-end">
-      <div class="toast-body">
-        <b>Login Successfully!</b>
-      </div>
-      <button type="button" class="btn-close btn-close-gray me-0 ms-auto mt-auto mt-auto mb-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-  </div>
+
   <!-- End of Main Content -->
   <!-- End of Page Wrapper -->
   <?php
+  include('./includes/toast_login-success.php');
   include('./includes/scripts.php');
   ?>
 </body>
