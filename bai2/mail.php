@@ -1,7 +1,7 @@
 <?php
-require "PHPMailer-master/src/PHPMailer.php";  //nhúng thư viện vào để dùng, sửa lại đường dẫn cho đúng nếu bạn lưu vào chỗ khác
-require "PHPMailer-master/src/SMTP.php"; //nhúng thư viện vào để dùng
-require 'PHPMailer-master/src/Exception.php'; //nhúng thư viện vào để dùng
+require('../PHPMailer-master/src/PHPMailer.php');
+require ('../PHPMailer-master/src/SMTP.php');
+require('../PHPMailer-master/src/Exception.php');
 if (isset($_POST)) {
   $mail = new PHPMailer\PHPMailer\PHPMailer(true);  //true: enables exceptions
   try {
@@ -10,9 +10,9 @@ if (isset($_POST)) {
     $mail->CharSet  = "utf-8";
     $mail->Host = 'smtp.gmail.com';  //SMTP servers
     $mail->SMTPAuth = true; // Enable authentication
-    $nguoigui = 'ngolequanvh@gmail.com';
-    $matkhau = 'asdfsgd';
-    $tennguoigui = 'le quan';
+    $nguoigui = 'khangtran2806@gmail.com';
+    $matkhau = 'muov ytsp icgz xzqj';
+    $tennguoigui = 'Khang Nguyen';
     $mail->Username = $nguoigui; // SMTP username
     $mail->Password = $matkhau;   // SMTP password
     $mail->SMTPSecure = 'ssl';  // encryption TLS/SSL 
@@ -23,7 +23,6 @@ if (isset($_POST)) {
     $tieude = $_POST['tieude'];
 
     $mail->addAddress($to, $to_name); //mail và tên người nhận  
-    $mail->addAddress("nlquan@vku.udn.vn", "lequan");
     $mail->isHTML(true);  // Set email format to HTML
     $mail->Subject = $tieude;
     $noidungthu = ' <div class="card" style="width: 18rem;">

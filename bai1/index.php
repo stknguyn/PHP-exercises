@@ -1,7 +1,7 @@
 <?php
-require "PHPMailer-master/src/PHPMailer.php";  //nhúng thư viện vào để dùng, sửa lại đường dẫn cho đúng nếu bạn lưu vào chỗ khác
-require "PHPMailer-master/src/SMTP.php"; //nhúng thư viện vào để dùng
-require 'PHPMailer-master/src/Exception.php'; //nhúng thư viện vào để dùng
+require "../PHPMailer-master/src/PHPMailer.php";  //nhúng thư viện vào để dùng, sửa lại đường dẫn cho đúng nếu bạn lưu vào chỗ khác
+require "../PHPMailer-master/src/SMTP.php"; //nhúng thư viện vào để dùng
+require '../PHPMailer-master/src/Exception.php'; //nhúng thư viện vào để dùng
 $mail = new PHPMailer\PHPMailer\PHPMailer(true);  //true: enables exceptions
 try {
   // $mail->SMTPDebug = 2;  // 0,1,2: chế độ debug. khi mọi cấu hình đều tớt thì chỉnh lại 0 nhé
