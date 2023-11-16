@@ -1,4 +1,5 @@
 [![](https://skillicons.dev/icons?i=php,vim,vscode)](https://skillicons.dev)
+## :warning: Lab 10 là Lab 9 trong elearning ( từ bài assignment 4 sẽ bị vượt lên 1 lab trong github)
 ## Giới thiệu
 Đây là repo chứa các bài tập môn Công nghệ và lập trình Web.
 ## Tổng quan
@@ -7,4 +8,4 @@
 - Nếu link gửi trên elearning có bị lỗi, xin thầy vui lòng mở theo branch trên github. Em cảm ơn!  
 
 
-## :warning: Lab 10 là Lab 9 trong elearning ( từ bài assignment 4 sẽ bị vượt lên 1 lab trong github)
+
